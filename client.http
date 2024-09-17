@@ -1,0 +1,76 @@
+### Definição da URL Base
+@base_url = http://localhost:8000
+
+### Login do Usuário
+POST {{base_url}}/api/login
+Content-Type: application/json
+Accept: application/json
+
+{
+  "email": "test@example.com",
+  "password": "password"
+}
+
+### Definir Token de Autenticação
+@token = 2|pFQ2g5KiVsr0PMhPkIFNZIbMoqesWary4mV7Gg5g17fa27c4
+
+### Listar Tarefas
+GET {{base_url}}/api/tasks
+Authorization: Bearer {{token}}
+Accept: application/json
+
+### Criar Nova Tarefa
+POST {{base_url}}/api/tasks
+Authorization: Bearer {{token}}
+Content-Type: application/json
+Accept: application/json
+
+{
+  "title": "Minha Primeira Tarefa",
+  "description": "Descrição da tarefa",
+  "status": "Pendente",
+  "priority": "Alta",
+  "deadline": "2024-09-30"
+}
+
+### Visualizar Detalhes de uma Tarefa
+GET {{base_url}}/api/tasks/1
+Authorization: Bearer {{token}}
+Accept: application/json
+
+### Atualizar uma Tarefa
+PUT {{base_url}}/api/tasks/1
+Authorization: Bearer {{token}}
+Content-Type: application/json
+Accept: application/json
+
+{
+  "title": "Tarefa Atualizada",
+  "description": "Descrição atualizada",
+  "status": "Em Andamento",
+  "priority": "Média",
+  "deadline": "2024-10-05"
+}
+
+### Completar uma Tarefa
+PUT {{base_url}}/api/tasks/1/complete
+Authorization: Bearer {{token}}
+Content-Type: application/json
+Accept: application/json
+
+### Excluir uma Tarefa
+DELETE {{base_url}}/api/tasks/1
+Authorization: Bearer {{token}}
+Accept: application/json
+
+### Solicitar Geração de Relatório
+POST {{base_url}}/api/reports/tasks
+Authorization: Bearer {{token}}
+Accept: application/json
+
+### Download do Relatório
+@file_name = reports/tasks_report_user_1_1726500948.csv
+
+GET {{base_url}}/api/reports/download?file={{file_name}}
+Authorization: Bearer {{token}}
+Accept: application/json
