@@ -82,7 +82,7 @@ class TaskController extends Controller
 
         $this->taskRepository->delete($task);
 
-        return response()->json(null, 204);
+        return response()->json(null, status: 204);
     }
 
     /**
@@ -105,7 +105,7 @@ class TaskController extends Controller
     private function authorizeTask(?Task $task): void
     {
         if (!$task || $task->user_id !== Auth::id()) {
-            abort(403, 'Acesso não autorizado à tarefa.');
+            return response()->json(['message' => 'Acesso não autorizado à tarefa.'], 403);
         }
     }
 }
